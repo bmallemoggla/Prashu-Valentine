@@ -121,6 +121,11 @@
 
   </style>
 </head>
+  <audio id="bgm" loop>
+  <source src="song.mpeg" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <body>
   <div class="wrap">
     <div class="card">
@@ -158,10 +163,13 @@
               <div class="tick"><b id="m">0</b><span>Minutes</span></div>
               <div class="tick"><b id="s">0</b><span>Seconds</span></div>
             </div>
+            <button id="musicBtn" class="primary" onclick="toggleMusic()">Play song 🎶</button>
+
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
               <input id="target" type="datetime-local" />
               <button onclick="saveDate()">Save</button>
-            </div>
+            </div> 
+            
           </div>
         </div>
 
@@ -411,9 +419,33 @@ Your Ammu ❤️`
     tick();
     setInterval(tick, 1000);
     startTypewriter('home');
+    let isPlaying = false;
+
+function toggleMusic(){
+  const audio = document.getElementById('bgm');
+  const btn = document.getElementById('musicBtn');
+
+  if(!audio) return;
+
+  if(!isPlaying){
+    audio.volume = 0.6;
+    audio.play().then(()=>{
+      isPlaying = true;
+      if(btn) btn.textContent = "Pause song ⏸️";
+    }).catch(()=>{
+      alert("Tap once again to start music ❤️ (iPhone rule)");
+    });
+  }else{
+    audio.pause();
+    isPlaying = false;
+    if(btn) btn.textContent = "Play song 🎶";
+  }
+}
+
   </script>
 </body>
 </html>
+
 
 
 
