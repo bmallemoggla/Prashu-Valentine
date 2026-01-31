@@ -113,6 +113,12 @@
       font-weight:900;
     }
     @keyframes blink { to { visibility: hidden; } }
+    .nav button.active{
+  background: var(--accent);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(225,29,72,.35);
+}
+
   </style>
 </head>
 <body>
@@ -127,10 +133,11 @@
           </div>
         </div>
         <div class="nav">
-          <button class="primary" onclick="showPage('home')">Home</button>
-          <button onclick="showPage('photos')">Photos</button>
-          <button onclick="showPage('letter')">Letter</button>
-        </div>
+  <button class="active" onclick="showPage('home', this)">Home</button>
+  <button onclick="showPage('photos', this)">Photos</button>
+  <button onclick="showPage('letter', this)">Letter</button>
+</div>
+
       </header>
 
       <!-- HOME -->
@@ -216,13 +223,20 @@ To Ammu;</textarea>
 
   <script>
     // Pages
-    function showPage(id){
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      burstHearts(10);
-      if(id === 'home') startTypewriter('home');
-      if(id === 'letter') startTypewriter('letter');
-      window.scrollTo({top:0, behavior:'smooth'});
+   function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  // ✅ Make clicked tab pink
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  burstHearts(10);
+  if(id === 'home') startTypewriter('home');
+  if(id === 'letter') startTypewriter('letter');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+
     }
 
     // Hearts
@@ -400,6 +414,7 @@ Your Ammu ❤️`
   </script>
 </body>
 </html>
+
 
 
 
