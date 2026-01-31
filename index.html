@@ -220,8 +220,7 @@
           <div id="twLetter" class="tw"></div>
           <p class="hint" style="margin-top:10px">If you ever want to say something to my heart... this space is yours...👇:</p>
 
-          <textarea id="Love Letter">
-To Ammu;</textarea>
+          <textarea id="hisMessage"></textarea>
 
           <div class="footer">
             <div class="pill">Tip: Open Home → tap hearts ✨
@@ -447,10 +446,20 @@ function toggleMusic(){
     if(btn) btn.textContent = "Play song 🎶";
   }
 }
+const msgBox = document.getElementById("hisMessage");
+
+if(msgBox){
+  msgBox.value = localStorage.getItem("prashu_message") || "";
+
+  msgBox.addEventListener("input", () => {
+    localStorage.setItem("prashu_message", msgBox.value);
+  });
+}
 
   </script>
 </body>
 </html>
+
 
 
 
